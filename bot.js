@@ -9,6 +9,7 @@ const bot = new TelegramBot(token, { polling: true });
 // Lắng nghe tin nhắn /start
 bot.onText(/\/start/, (msg) => {
   const chatId = msg.chat.id;
+  console.log("Received /start command from chat:", chatId);  // Log chat ID
   bot.sendMessage(chatId, 'Chào bạn! Tôi là bot Telegram của bạn.');
 });
 
