@@ -1,20 +1,21 @@
-name: Deploy Telegram Bot
+name: Run Telegram Bot
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
-  deploy:
+  run-bot:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
       with:
         node-version: '16'
 
@@ -22,7 +23,6 @@ jobs:
       run: npm install
 
     - name: Run Telegram bot
-      run: node index.js
-
-    - name: Run additional JavaScript file
-      run: node shareao.js
+      env:
+        BOT_TOKEN: ${{ secrets.BOT_TOKEN }} # Truyền token từ GitHub Secrets vào biến môi trường
+      run: node bot.js
