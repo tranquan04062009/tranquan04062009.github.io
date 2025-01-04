@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - master
+  schedule:
+      - cron: "0 17 * * *"  # Chạy lúc 5 giờ chiều
+      - cron: "0 18 * * *"  # Chạy lúc 6 giờ chiều
+      - cron: "0 19 * * *"  # Chạy lúc 7 giờ tối
+      - cron: "0 20 * * *"  # Chạy lúc 8 giờ tối
+      - cron: "0 21 * * *"
 
 jobs:
   deploy:
