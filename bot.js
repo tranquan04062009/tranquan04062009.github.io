@@ -1,20 +1,14 @@
 const TelegramBot = require('node-telegram-bot-api');
 
-// Token của bot
-const token = '7755708665:AAGrgMh-PDL3QcfGwIyKb22nU_OpG2Z8i-Y';
+// Đọc token từ biến môi trường
+const token = process.env.BOT_TOKEN;
 
-// Khởi tạo bot với polling
+if (!token) {
+  throw new Error('BOT_TOKEN không được định nghĩa. Hãy đặt biến môi trường BOT_TOKEN.');
+}
+
 const bot = new TelegramBot(token, { polling: true });
 
-// Lắng nghe tin nhắn /start
 bot.onText(/\/start/, (msg) => {
-  const chatId = msg.chat.id;
-  console.log("Received /start command from chat:", chatId);  // Log chat ID
-  bot.sendMessage(chatId, 'Chào bạn! Tôi là bot Telegram của bạn.');
-});
-
-// Lắng nghe tin nhắn /help
-bot.onText(/\/help/, (msg) => {
-  const chatId = msg.chat.id;
-  bot.sendMessage(chatId, 'Sử dụng lệnh /start để bắt đầu.');
+  bot.sendMessage(msg.chat.id, 'Chào bạn! Bot đã khởi động.');
 });
